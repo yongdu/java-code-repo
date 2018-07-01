@@ -1,4 +1,4 @@
-package yong.du.algorithm;
+package yong.du.leetcode;
 
 import java.util.HashSet;
 import java.util.Set;
