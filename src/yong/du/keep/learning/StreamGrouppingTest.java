@@ -37,6 +37,10 @@ public class StreamGrouppingTest {
     }
 	
     public static void main(String ... args) {
+    	Integer a = new Integer(6);
+    	int b = a;
+    	System.out.print(b );
+    	System.out.println(a.TYPE);
         System.out.println("Dishes grouped by type: " + groupDishesByType());
         System.out.println("Dish names grouped by type: " + groupDishNamesByType());
         //System.out.println("Dish tags grouped by type: " + groupDishTagsByType());
