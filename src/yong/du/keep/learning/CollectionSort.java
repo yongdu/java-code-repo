@@ -16,7 +16,20 @@ public class CollectionSort {
             list.add(new Person("Yuan", 18));
 
 
-            System.out.printf("Original  sort, list:%s\n", list);
+            ArrayList<Student> listStudents = new ArrayList<Student>();
+            listStudents.add(new Student(1,"Ada",30));
+            listStudents.add(new Student(2,"C",27));
+            listStudents.add(new Student(3,"java",10));
+
+            System.out.printf("Original sort of list students : list:%s\n", listStudents);
+            Collections.sort(listStudents,new AscIdComparator());
+            System.out.printf("Age sort by ascending: list:%s\n", listStudents);
+
+            Collections.sort(listStudents, new DescComparator());
+            System.out.printf("Age sort by descending: list:%s\n", listStudents);
+
+            System.out.println();
+            System.out.printf("Original sort of list people:  list:%s\n", list);
 
             // comparable asc
             Collections.sort(list);
@@ -32,9 +45,6 @@ public class CollectionSort {
             //desc comparator
             Collections.sort(list, new DescAgeComparator());
             System.out.printf("Desc(age) sort, list:%s\n", list);
-
-
-
 
 
         }
@@ -67,6 +77,7 @@ public class CollectionSort {
             public int getAge() {
                 return age;
             }
+
             @Override
             public String toString() {
                 return name + " - " +age;
@@ -93,6 +104,26 @@ public class CollectionSort {
             }
         }
 
+        private  static  class Student{
+            int id;
+            String name;
+            int age;
+
+            public Student(int id, String name, int age){
+                this.age= age;
+                this.id = id;
+                this.name = name;
+            }
+
+            public String getName(){ return name;}
+            public int getAge(){ return age;}
+            public int getId(){ return id; }
+
+            @Override
+            public String toString() {
+                return id + " - " + name + " - " +age ;
+            }
+        }
 
         private static class AscAgeComparator implements Comparator<Person> {
 
@@ -109,6 +140,16 @@ public class CollectionSort {
             public int compare(Person p1, Person p2) {
                 return p2.getAge() - p1.getAge();
             }
+        }
+
+        private static class AscIdComparator implements Comparator<Student>{
+            @Override
+            public int compare(Student s1, Student s2){ return s1.getId() - s2.getId(); }
+        }
+
+        private static class DescComparator implements Comparator<Student>{
+            @Override
+            public int compare(Student s1, Student s2) { return s2.getId() - s1.getId();}
         }
 
 
