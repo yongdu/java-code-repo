@@ -21,5 +21,11 @@ public class AutoBoxingAndUnboxing {
 	public static void main(String[] args) {
 		int a = 10;
 		display(a);
+
+        System.out.println(Integer.valueOf(127)==Integer.valueOf("127"));
+        System.out.println(Integer.valueOf(128)==Integer.valueOf("128"));
+        System.out.println(Integer.valueOf(128));
+        System.out.println(Integer.valueOf("128"));
+
 	}
 }
