@@ -2,13 +2,12 @@ package yong.du.keep.learning.Collectors;
 
 import yong.du.keep.learning.Dish;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
-import  static  java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.*;
 import static yong.du.keep.learning.Dish.menu;
 
-public class Collectors {
+public class PreDefinedCollectors {
     public static void main(String ... args) {
         // using collector
         long howManyDishes = menu.stream().collect(counting());
@@ -50,6 +49,30 @@ public class Collectors {
         Map<Dish.Type, List<Dish>> dishesByType = menu.stream().collect(groupingBy(Dish::getType));
         System.out.println("type of dish is  " + dishesByType);
 
+        // partioning
+        Map<Boolean ,Map<Dish.Type, List<Dish>>> vegetarianDishesByType =
+                menu.stream().collect(
+                        partitioningBy(Dish::isVegetarian,
+                                groupingBy(Dish::getType))
+                );
+        System.out.println("partitioned by isVegentarian " + vegetarianDishesByType);
 
+        Map<Boolean, Dish> mostCaloricPartitionedByVegetarian =
+                menu.stream().collect(
+                  partitioningBy(Dish::isVegetarian,
+                          collectingAndThen(
+                                  maxBy(Comparator.comparingInt(
+                                  Dish::getCalories)),Optional::get
+                          )
+                  )
+                );
+        System.out.println("most caloric dish that partitioned by isVegentarian " + mostCaloricPartitionedByVegetarian);
+
+
+        // toList and toListCollector()
+        List<Dish> dishesByBuiltInCollector = menu.stream().collect(toList());
+        List<Dish> dishesBySelfDesfinedCollector = menu.stream().collect(new ToListCollector<>());
+        System.out.println("Dishes by build in collector" + dishesByBuiltInCollector);
+        System.out.println("Dishes by self defined collector" + dishesBySelfDesfinedCollector);
     }
 }
